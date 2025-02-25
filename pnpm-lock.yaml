@@ -7,18 +7,42 @@ settings:
 importers:
 
   .:
+    dependencies:
+      crypto:
+        specifier: ^1.0.1
+        version: 1.0.1
     devDependencies:
+      '@types/node':
+        specifier: ^22.13.5
+        version: 22.13.5
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
 
 packages:
 
+  '@types/node@22.13.5':
+    resolution: {integrity: sha1-I63R1xrN2rLGpNMduJwPmNMwtRE=}
+
+  crypto@1.0.1:
+    resolution: {integrity: sha1-KvG3ytgXXSTIobB3glV5SiGAMDc=}
+
   typescript@5.7.3:
     resolution: {integrity: sha1-kZtEp9u4WDqbhW0WK+JKVL+ABz4=}
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@6.20.0:
+    resolution: {integrity: sha1-gXG/IsH1iNFVTVW/IEvGJK84hDM=}
+
 snapshots:
 
+  '@types/node@22.13.5':
+    dependencies:
+      undici-types: 6.20.0
+
+  crypto@1.0.1: {}
+
   typescript@5.7.3: {}
+
+  undici-types@6.20.0: {}
