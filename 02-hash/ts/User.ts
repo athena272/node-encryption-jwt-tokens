@@ -1,16 +1,21 @@
 import generateHash from "./hash";
 
+type UserParams = {
+    name: string,
+    password: string
+}
+
 export default class User {
     name: string;
     hash: string;
 
-    constructor({ name, password }: { name: string, password: string }) {
+    constructor({ name, password }: UserParams) {
         this.name = name
         this.hash = generateHash(password)
     }
 
-    authenticate({ name, password }) {
-        if (this.name === name && this.hash === password) {
+    authenticate({ name, password }: UserParams) {
+        if (this.name === name && this.hash === generateHash(password)) {
             console.log("User successfully authenticated!")
             return true
         }
