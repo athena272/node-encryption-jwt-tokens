@@ -1,0 +1,7 @@
+pnpm install typescript --save-dev
+
+pnpm add typescript -D
+
+pnpm install @types/node --save-dev
+
+tsc /ts/*.ts --outDir /js
