@@ -36,3 +36,5 @@ const originalMessage = decryptMessage(crypteMessage, 3);
 console.log("🚀 ~ Decrypted Message:", originalMessage); // "Hello, World! Zz Aa"
 
 console.log(encryptMessage("alura", -4))
+
+console.log("🚀 ~ encryptMessage('abcd', -4):", encryptMessage('abcd', -4))
