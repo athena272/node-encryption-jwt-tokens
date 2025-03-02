@@ -12,7 +12,7 @@ export default class User {
     salt: string;
 
     constructor({ name, password }: UserParams) {
-        this.name = name,
+        this.name = name;
         [this.salt, this.hash] = generateHashImprovement(password)
     }
 
