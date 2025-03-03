@@ -13,23 +13,36 @@ export default class User {
 
     constructor({ name, password }: UserParams) {
         this.name = name;
-        [this.salt, this.hash] = generateHashImprovement(password)
+        const { salt, hash } = generateHashImprovement(password)
+        this.salt = salt
+        this.hash = hash
     }
 
-    authenticate({ name, password }: UserParams) {
-        if (name === this.name) {
-            const hashTest = scryptSync(password, this.salt, 64)
-            const userHash = Buffer.from(this.hash, 'hex')
+    private generateHashWithSalt(password: string, salt: string, keyLength: number): Buffer {
+        return scryptSync(password, salt, keyLength);
+    }
 
-            const hashsMatch = timingSafeEqual(userHash, hashTest)
-            if (hashsMatch) {
-                console.log("User successfully authenticated!")
-                return true
-            }
-
+    authenticate({ name, password }: UserParams): boolean {
+        if (!name || name !== this.name) {
+            console.log("❌ Incorrect username or password. (first if)");
+            return false;
         }
 
-        console.log("Incorrect username or password.")
-        return false
+        const hashTest = this.generateHashWithSalt(password, this.salt, 64)
+        const userHash = Buffer.from(this.hash, 'hex')
+
+        if (hashTest.length !== userHash.length) {
+            console.log("❌ Incorrect username or password. (second if)");
+            return false;
+        }
+
+        const hashsMatch = timingSafeEqual(userHash, hashTest)
+        if (hashsMatch) {
+            console.log("✅ User successfully authenticated!");
+            return true;
+        }
+
+        console.log("❌ Incorrect username or password. (last if)");
+        return false;
     }
 }
