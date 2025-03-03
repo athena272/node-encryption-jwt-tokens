@@ -1,12 +1,17 @@
-import User from './User'
+import User from './User';
 
-const user = new User({ name: 'John', password: 'myPassword' })
-console.log("🚀 ~ user:", user)
+const user = new User({ name: 'John', password: 'myPassword' });
+console.log("🚀 ~ User created:", user);
 
-//Succees test case
-user.authenticate({ name: 'John', password: 'myPassword' })
+function testAuthentication(user: User, name: string, password: string) {
+    console.log(`🔎 Testing authentication for user: "${name}"`);
+    user.authenticate({ name, password });
+    console.log("─────────────────────────────────────────────");
+}
 
-//Failed test case
-user.authenticate({ name: 'Jo', password: 'myPassword' })
-user.authenticate({ name: 'John', password: 'mypassword' })
+// Success test case
+testAuthentication(user, 'John', 'myPassword');
 
+// Failed test cases
+testAuthentication(user, 'Jo', 'myPassword');
+testAuthentication(user, 'John', 'mypassword');
