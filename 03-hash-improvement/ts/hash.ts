@@ -1,8 +1,11 @@
 import { scryptSync, randomBytes } from 'crypto'
 
-export default function generateHashImprovement(password: string): [string, string] {
-    const salt = randomBytes(16).toString('hex')
-    const passwordHash = scryptSync(password, salt, 64).toString('hex')
+const SALT_LENGTH = 16
+const KEY_LENGTH = 64
 
-    return [salt, passwordHash]
+export default function generateHashImprovement(password: string): { salt: string; hash: string } {
+    const salt = randomBytes(SALT_LENGTH).toString('hex')
+    const passwordHash = scryptSync(password, salt, KEY_LENGTH).toString('hex')
+
+    return { salt, hash: passwordHash }
 }
